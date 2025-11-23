@@ -54,6 +54,11 @@ This project performs an initial week-1 analysis that links news sentiment to st
 └─ README.md
 ```
 
+## Status
+
+![Python Version](https://img.shields.io/badge/python-3.10%2C3.11-blue.svg)
+![CI](https://github.com/Henok-Z-Tekle/week1-news-sentiment-stock-analysis/actions/workflows/unittests.yml/badge.svg)
+
 ## How to run (local)
 
 1. Create and activate a Python environment (recommended):
