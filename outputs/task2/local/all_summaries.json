@@ -1,0 +1,38 @@
+{
+  "AAPL.csv": {
+    "file": "AAPL.csv",
+    "rows": 3774,
+    "sharpe": 1.136098349845113,
+    "annual_vol": 0.28590169046477826
+  },
+  "AMZN.csv": {
+    "file": "AMZN.csv",
+    "rows": 3774,
+    "sharpe": 0.9471208767873943,
+    "annual_vol": 0.346527589575433
+  },
+  "GOOG.csv": {
+    "file": "GOOG.csv",
+    "rows": 3774,
+    "sharpe": 0.8334491943155411,
+    "annual_vol": 0.2751614903189818
+  },
+  "META.csv": {
+    "file": "META.csv",
+    "rows": 2923,
+    "sharpe": 0.6792460211284289,
+    "annual_vol": 0.4013061101458515
+  },
+  "MSFT.csv": {
+    "file": "MSFT.csv",
+    "rows": 3774,
+    "sharpe": 0.935890926931032,
+    "annual_vol": 0.2680379737431222
+  },
+  "NVDA.csv": {
+    "file": "NVDA.csv",
+    "rows": 3774,
+    "sharpe": 1.0302292559657567,
+    "annual_vol": 0.459047817901422
+  }
+}

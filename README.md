@@ -26,10 +26,25 @@ Next steps:
 
 This project performs an initial week-1 analysis that links news sentiment to stock indicators. The repository currently contains:
 
-- Lightweight code to load data and run basic exploratory data analysis (EDA).
-- A notebook `notebooks/news_eda.ipynb` that inspects downloaded files, loads CSVs, runs basic EDA using the helper classes, and writes an analysis summary to `outputs/analysis/`.
-- A small processing script (`scripts/process_datasets.py`) that attempted to parse files in `data/raw/` and created JSON summaries in `outputs/summaries/`.
 
+
+## Task 2 — Quantitative Analysis (branch: task-2)
+
+Executed tasks summary:
+
+- Data preparation: processed local yfinance CSVs located in `data/yfinance_data/Data/`.
+- Technical indicators: SMA, EMA, RSI(14), MACD(12,26,9) computed in `src/quant/indicators.py` (prefers `TA-Lib`, falls back to `ta`).
+- Metrics: daily returns and Sharpe ratio computed; optional `pynance` metrics attempted with graceful fallback.
+- Outputs: processed indicator CSVs and per-ticker JSON summaries written to `outputs/task2/local/`; plots written to `outputs/task2/plots/` by `scripts/generate_task2_plots.py`.
+- Scripts & utilities:
+	- `scripts/generate_task2_plots.py` — generates Close+MA and RSI/MACD plots for indicator CSVs.
+	- `src/quant/process_local_yfinance.py` — standardizes input CSVs, computes indicators and metrics, and writes summaries.
+
+Notes & next steps:
+
+- Tests: a basic unit test for `DataLoader` exists; recommended additions: tests for `add_technical_indicators()` and `standardize_df()`.
+- Environment: `TA-Lib` is optional (requires C library). Add `ta` and `pytest` to your environment for fallbacks and testing.
+- Improvements: replace bare excepts with explicit error handling, add logging instead of prints, and add a small CLI or Makefile to reproduce Task 2 outputs easily.
 ## What the code does
 
 - `src/data_loader.py` — DataLoader class: simple wrapper around `pandas.read_csv` with convenience helpers (`head`, `describe`, `save_sample`). Use it to load your dataset files (CSV).
