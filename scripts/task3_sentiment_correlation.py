@@ -10,6 +10,11 @@ import json
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from src.analysis.sentiment import compute_sentiment, aggregate_sentiment_by_date
 
 
