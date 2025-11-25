@@ -1,0 +1,44 @@
+{
+  "AAPL": {
+    "ticker": "AAPL",
+    "rows_stock": 3774,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 2226,
+    "pearson_corr": -0.0028148910023683012
+  },
+  "AMZN": {
+    "ticker": "AMZN",
+    "rows_stock": 3774,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 2226,
+    "pearson_corr": -0.01944438193707325
+  },
+  "GOOG": {
+    "ticker": "GOOG",
+    "rows_stock": 3774,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 2226,
+    "pearson_corr": 0.014278239326832306
+  },
+  "META": {
+    "ticker": "META",
+    "rows_stock": 2923,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 1984,
+    "pearson_corr": -0.00031547278328721516
+  },
+  "MSFT": {
+    "ticker": "MSFT",
+    "rows_stock": 3774,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 2226,
+    "pearson_corr": -0.011811247192373921
+  },
+  "NVDA": {
+    "ticker": "NVDA",
+    "rows_stock": 3774,
+    "rows_sentiment_days": 2528,
+    "overlap_days": 2226,
+    "pearson_corr": 0.009129300378979775
+  }
+}

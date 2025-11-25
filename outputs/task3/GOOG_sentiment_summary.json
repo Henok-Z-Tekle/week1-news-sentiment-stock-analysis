@@ -1,0 +1,7 @@
+{
+  "ticker": "GOOG",
+  "rows_stock": 3774,
+  "rows_sentiment_days": 2528,
+  "overlap_days": 2226,
+  "pearson_corr": 0.014278239326832306
+}

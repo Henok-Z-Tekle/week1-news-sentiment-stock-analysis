@@ -45,6 +45,25 @@ Notes & next steps:
 - Tests: a basic unit test for `DataLoader` exists; recommended additions: tests for `add_technical_indicators()` and `standardize_df()`.
 - Environment: `TA-Lib` is optional (requires C library). Add `ta` and `pytest` to your environment for fallbacks and testing.
 - Improvements: replace bare excepts with explicit error handling, add logging instead of prints, and add a small CLI or Makefile to reproduce Task 2 outputs easily.
+
+## Task 3 — Correlation between news and stock movement (branch: task-3)
+
+Executed tasks summary:
+
+- Date alignment: news items are normalized to calendar dates and stock daily returns are normalized to date (no time). Implemented in `scripts/task3_sentiment_correlation.py` using helper `src/analysis/sentiment.py`.
+- Sentiment analysis: uses `TextBlob` (polarity) for per-article sentiment in `src/analysis/sentiment.py`. Aggregation by date (mean) is performed to get daily sentiment scores.
+- Daily returns calculation: computed as percentage change of `Close` prices from processed indicator CSVs in `outputs/task2/local/`.
+- Correlation analysis: Pearson correlation computed between aggregated daily sentiment and daily stock returns; per-ticker summaries and an overall `correlations.csv` are saved in `outputs/task3/`.
+
+Notes:
+
+- The script expects a news CSV at `data/newsData/raw_analyst_ratings.csv` (column name should contain `headline`, `title`, `text`, or `content`, and a date column). It also reads processed stock indicator CSVs from `outputs/task2/local/`.
+- Results are written to `outputs/task3/`.
+
+Recommended next steps:
+
+- Add unit tests for `compute_sentiment()` and `aggregate_sentiment_by_date()`.
+- Replace prints with structured `logging` and tighten exception handling across scripts.
 ## What the code does
 
 - `src/data_loader.py` — DataLoader class: simple wrapper around `pandas.read_csv` with convenience helpers (`head`, `describe`, `save_sample`). Use it to load your dataset files (CSV).
