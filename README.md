@@ -1,0 +1,140 @@
+## Interim Task 1 — Project scaffold and initial modules
+
+This repository now includes an initial scaffold and small helpers to demonstrate progress for Week 1:
+
+- `src/data_loader.py`: DataLoader class for loading CSV datasets and basic helpers.
+- `src/eda.py`: EDA class with basic statistics, moving averages and correlation helper methods.
+- `tests/test_data_loader.py`: Basic pytest unit test to validate CSV loading.
+
+Interim coverage relative to the rubric:
+
+- **Interim Code Organisation:** Foundations toward modular OOP (DataLoader, EDA) — High/Moderate.
+- **Interim Repository Organisation:** Added `src/` and `tests/` modules and an updated README — Moderate.
+- **Readability and Interim Documentation:** README updated with next steps; inline docstrings included — Moderate.
+- **Interim Functionality and Task Progress:** Dataset loading and basic EDA utilities implemented; ready to connect datasets from provided links — Moderate/High.
+- **Interim Use of Version Control:** New branch workflow created earlier; changes committed with focused messages — High/Moderate.
+
+Next steps:
+
+1. Place datasets (CSV) under `data/` or update paths in `notebooks/news_eda.ipynb`.
+2. Run `pytest` to validate unit tests.
+3. Expand EDA and add initial sentiment and correlation analysis using the provided Drive files.
+
+---
+
+## Project Overview
+
+This project performs an initial week-1 analysis that links news sentiment to stock indicators. The repository currently contains:
+
+
+
+## Task 2 — Quantitative Analysis (branch: task-2)
+
+Executed tasks summary:
+
+- Data preparation: processed local yfinance CSVs located in `data/yfinance_data/Data/`.
+- Technical indicators: SMA, EMA, RSI(14), MACD(12,26,9) computed in `src/quant/indicators.py` (prefers `TA-Lib`, falls back to `ta`).
+- Metrics: daily returns and Sharpe ratio computed; optional `pynance` metrics attempted with graceful fallback.
+- Outputs: processed indicator CSVs and per-ticker JSON summaries written to `outputs/task2/local/`; plots written to `outputs/task2/plots/` by `scripts/generate_task2_plots.py`.
+- Scripts & utilities:
+	- `scripts/generate_task2_plots.py` — generates Close+MA and RSI/MACD plots for indicator CSVs.
+	- `src/quant/process_local_yfinance.py` — standardizes input CSVs, computes indicators and metrics, and writes summaries.
+
+Notes & next steps:
+
+- Tests: a basic unit test for `DataLoader` exists; recommended additions: tests for `add_technical_indicators()` and `standardize_df()`.
+- Environment: `TA-Lib` is optional (requires C library). Add `ta` and `pytest` to your environment for fallbacks and testing.
+- Improvements: replace bare excepts with explicit error handling, add logging instead of prints, and add a small CLI or Makefile to reproduce Task 2 outputs easily.
+
+## Task 3 — Correlation between news and stock movement (branch: task-3)
+
+Executed tasks summary:
+
+- Date alignment: news items are normalized to calendar dates and stock daily returns are normalized to date (no time). Implemented in `scripts/task3_sentiment_correlation.py` using helper `src/analysis/sentiment.py`.
+- Sentiment analysis: uses `TextBlob` (polarity) for per-article sentiment in `src/analysis/sentiment.py`. Aggregation by date (mean) is performed to get daily sentiment scores.
+- Daily returns calculation: computed as percentage change of `Close` prices from processed indicator CSVs in `outputs/task2/local/`.
+- Correlation analysis: Pearson correlation computed between aggregated daily sentiment and daily stock returns; per-ticker summaries and an overall `correlations.csv` are saved in `outputs/task3/`.
+
+Notes:
+
+- The script expects a news CSV at `data/newsData/raw_analyst_ratings.csv` (column name should contain `headline`, `title`, `text`, or `content`, and a date column). It also reads processed stock indicator CSVs from `outputs/task2/local/`.
+- Results are written to `outputs/task3/`.
+
+Recommended next steps:
+
+- Add unit tests for `compute_sentiment()` and `aggregate_sentiment_by_date()`.
+- Replace prints with structured `logging` and tighten exception handling across scripts.
+## What the code does
+
+- `src/data_loader.py` — DataLoader class: simple wrapper around `pandas.read_csv` with convenience helpers (`head`, `describe`, `save_sample`). Use it to load your dataset files (CSV).
+- `src/eda.py` — EDA class: basic analysis helpers including `moving_average`, `correlation_matrix`, and `basic_stats` for numeric columns.
+- `scripts/process_datasets.py` — scans `data/raw/`, attempts to read files as CSV, and writes a small JSON summary per file to `outputs/summaries/`.
+- `notebooks/news_eda.ipynb` — notebook that uses the above to produce per-file EDA, creates `outputs/analysis/task1_analysis_summary.json`, and contains next-steps for plotting and sentiment analysis.
+
+## Repository structure (key files)
+
+```
+.
+├─ data/raw/                 # raw files (not all raw files are committed to avoid large binaries)
+├─ docs/slides/              # exported slides (PPTX) from shared links (not committed by default)
+├─ outputs/summaries/        # small JSON summaries generated by the processing script
+├─ outputs/analysis/         # analysis summaries written by the notebook
+├─ notebooks/news_eda.ipynb  # main notebook for Task 1
+├─ scripts/process_datasets.py
+├─ src/data_loader.py
+├─ src/eda.py
+├─ tests/test_data_loader.py
+├─ requirements.txt
+└─ README.md
+```
+
+## Status
+
+![Python Version](https://img.shields.io/badge/python-3.10%2C3.11-blue.svg)
+![CI](https://github.com/Henok-Z-Tekle/week1-news-sentiment-stock-analysis/actions/workflows/unittests.yml/badge.svg)
+
+## How to run (local)
+
+1. Create and activate a Python environment (recommended):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+2. Run unit tests:
+
+```powershell
+pytest -q
+```
+
+3. To reproduce the EDA run in the notebook:
+
+```powershell
+# open Jupyter and run the notebook
+jupyter lab notebooks\news_eda.ipynb
+```
+
+4. To re-generate summaries from files in `data/raw/`:
+
+```powershell
+python scripts\process_datasets.py
+```
+
+## Notes about data and commits
+
+- Raw files from Google Drive were downloaded into `data/raw/` during development, but large raw files were not committed to the repository to avoid bloat. Small JSON summaries and the processing script were committed.
+- If you want raw binary datasets tracked in the repo, I can set up Git LFS and add selected files.
+
+## Next steps (recommended)
+
+1. Run full EDA with visualisations in the notebook (plots, distributions, time series overlays).
+2. Add sentiment extraction (TextBlob or transformer-based) and compute correlations with stock indicators.
+3. Add more unit tests and CI checks for notebook execution (e.g., nbval) and expand documentation.
+
+## Who to contact
+
+If you want me to continue, reply with the option you prefer: add plotting (A), run sentiment analysis and correlation (B), or add raw files + Git LFS (C).
+
+
